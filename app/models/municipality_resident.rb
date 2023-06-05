@@ -4,6 +4,7 @@ require 'uploaders/image_uploader'
 require 'services/cns'
 
 class MunicipalityResident < ApplicationRecord
+  searchkick callbacks: :async
   include Uploaders::ImageUploader::Attachment(:image)
   include BaseErrors
 

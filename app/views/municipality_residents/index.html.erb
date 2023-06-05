@@ -1,8 +1,9 @@
 <div class="table-responsive">
   <h1>Lista de Municipes</h1>
 
-  <%= form_with( url: municipality_residents_path ,method: :get , remote: true) do |f| %>
+  <%= form_with url: municipality_residents_path, method: :get do |f| %>
     <%= f.text_field :search %>
+    <%= f.hidden_field :model, value: :municipality_resident %>
     <%= f.submit "Search" %>
   <% end %>
   <table class="table table-striped table-sm fs--1 mb-0" id="municipality_residents">

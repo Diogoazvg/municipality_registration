@@ -106,6 +106,14 @@ GEM
       railties (>= 3.2)
     down (5.4.1)
       addressable (~> 2.8)
+    elastic-transport (8.2.1)
+      faraday (< 3)
+      multi_json
+    elasticsearch (8.8.0)
+      elastic-transport (~> 8)
+      elasticsearch-api (= 8.8.0)
+    elasticsearch-api (8.8.0)
+      multi_json
     erubi (1.12.0)
     execjs (2.8.1)
     factory_bot (6.2.1)
@@ -115,9 +123,14 @@ GEM
       railties (>= 5.0.0)
     faker (3.2.0)
       i18n (>= 1.8.11, < 2)
+    faraday (2.7.5)
+      faraday-net_http (>= 2.0, < 3.1)
+      ruby2_keywords (>= 0.0.4)
+    faraday-net_http (3.0.2)
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    hashie (5.0.0)
     i18n (1.13.0)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.1.6)
@@ -144,6 +157,7 @@ GEM
     mini_mime (1.1.2)
     minitest (5.18.0)
     msgpack (1.7.1)
+    multi_json (1.15.0)
     net-imap (0.3.4)
       date
       net-protocol
@@ -245,6 +259,7 @@ GEM
       rubocop-capybara (~> 2.17)
       rubocop-factory_bot (~> 2.22)
     ruby-progressbar (1.13.0)
+    ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -254,6 +269,9 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    searchkick (5.2.4)
+      activemodel (>= 5.2)
+      hashie
     selenium-webdriver (4.9.1)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -320,6 +338,7 @@ DEPENDENCIES
   cpf_cnpj (~> 0.5.0)
   debug
   dotenv-rails (~> 2.8, >= 2.8.1)
+  elasticsearch
   factory_bot_rails (~> 6.2)
   faker (~> 3.2)
   importmap-rails
@@ -332,6 +351,7 @@ DEPENDENCIES
   rubocop-faker
   rubocop-rails
   rubocop-rspec
+  searchkick
   selenium-webdriver
   shoulda-matchers (~> 5.0)
   shrine (~> 3.4)
