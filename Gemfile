@@ -43,6 +43,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'cpf_faker', '~> 1.3'
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end

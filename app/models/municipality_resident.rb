@@ -12,6 +12,7 @@ class MunicipalityResident < ApplicationRecord
   accepts_nested_attributes_for :address
 
   validates :full_name, :email, :birthday, :phone_number, :cpf, :cns, presence: true
+  validates :cpf, uniqueness: { case_sensitive: false }
   validate :valid_cpf?, :valid_birthday?, :valid_email?, :valid_cns?
 
   private
