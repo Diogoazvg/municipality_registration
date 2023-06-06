@@ -18,6 +18,7 @@ gem 'shrine', '~> 3.4'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
+gem 'twilio-ruby', '~> 6.0', '>= 6.0.2'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do

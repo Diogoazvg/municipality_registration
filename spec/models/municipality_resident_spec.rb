@@ -10,6 +10,12 @@ RSpec.describe MunicipalityResident, type: :model do
   let(:email) { 'jhon_doe@email.com' }
   let(:phone_number) { '22986676541' }
   let(:birthday) { Date.current - 20.years }
+  let(:twilio_client) { instance_double(Twilio::REST::Client) }
+
+  before do
+    allow(Twilio::REST::Client).to receive(:new).and_return(twilio_client)
+    allow(twilio_client).to receive_message_chain(:messages, :create)
+  end
 
   context 'with validations' do
     it { is_expected.to validate_presence_of(:full_name) }
@@ -37,31 +43,41 @@ RSpec.describe MunicipalityResident, type: :model do
     it_behaves_like 'invalid_attributes'
   end
 
-  # context 'when invalid email' do
-  #   let(:email) { 'jhon_doe@@.email.com' }
+  context 'when invalid email' do
+    let(:email) { 'jhon_doe@@.email.com' }
 
-  #   it_behaves_like 'invalid_attributes'
-  # end
+    it_behaves_like 'invalid_attributes'
+  end
 
-  # context 'when invalid cns' do
-  #   let(:email) { '999999999999999' }
+  context 'when invalid cns' do
+    let(:email) { '999999999999999' }
 
-  #   it_behaves_like 'invalid_attributes'
-  # end
+    it_behaves_like 'invalid_attributes'
+  end
 
-  # context 'when valid attributes' do
-  #   it { is_expected.to be_valid }
-  # end
+  context 'when valid attributes' do
+    it { is_expected.to be_valid }
+  end
 
-  # context 'when invalid email' do
-  #   let(:email) { 'jhon_doe@@.email.com' }
+  context 'when invalid email' do
+    let(:email) { 'jhon_doe@@.email.com' }
 
-  #   it { is_expected.to be_invalid }
-  # end
+    it { is_expected.to be_invalid }
+  end
 
-  # context 'when invalid cns' do
-  #   let(:email) { '999999999999999' }
+  context 'when invalid cns' do
+    let(:email) { '999999999999999' }
 
-  #   it { is_expected.to be_invalid }
-  # end
+    it { is_expected.to be_invalid }
+  end
+
+  context 'when update record' do
+    subject { create(:municipality_resident, full_name: 'Ray') }
+
+    let(:update) { subject.update!(full_name: 'Joe') }
+
+    it 'description' do
+      expect { update }.to change(subject, :full_name).from('Ray').to('Joe')
+    end
+  end
 end

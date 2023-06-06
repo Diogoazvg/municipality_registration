@@ -29,3 +29,10 @@ pt-br:
   errors:
     messages:
       blank: Não pode ficar em branco.
+  sms:
+    messages:
+      updated_data: Dados atualizados.
+      registered_successfully: Registro criado com sucesso.
+  email:
+    messages:
+      Welcome to County: Bem vindo ao município.

@@ -14,6 +14,7 @@
         <th> CPF </th>
         <th> CNS </th>
         <th> Telefone </th>
+        <th> Email </th>
         <th> Active? </th>
         <th> City </th>
         <th> CEP </th>
@@ -34,6 +35,7 @@
         <td><%= "#{municipality_resident.cpf.first(3)}.***.***-#{municipality_resident.cpf.last(2)}"%></td>
         <td><%= "#{municipality_resident.cns.first(3)}************"%></td>
         <td><%= "(#{municipality_resident.phone_number.first(2)}) *****-#{municipality_resident.phone_number.last(4)}"%></td>
+        <td><%= municipality_resident.email %></td>
         <td><%= municipality_resident.active? %></td>
         <td> <%= address&.city %> </td>
         <td> <%= address&.zip_code %> </td>
