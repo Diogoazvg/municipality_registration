@@ -29,10 +29,3 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-
-
-coverage/
-
-.env
-/public/uploads
-.byebug_history
