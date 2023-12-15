@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  postgresdb:
+    image: postgres:15.3-alpine
+    container_name: municipality_postgres_db
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    command: >
+      -c max_connections=200
+      -c shared_buffers=1GB
+      -c effective_cache_size=3GB
+      -c work_mem=5242kB
+      -c maintenance_work_mem=256MB
+      -c min_wal_size=1GB
+      -c max_wal_size=2GB
+      -c checkpoint_completion_target=0.7
+      -c wal_buffers=16MB
+      -c default_statistics_target=100
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/municipality_registration
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgresdb
+volumes:
+  postgres-data:
