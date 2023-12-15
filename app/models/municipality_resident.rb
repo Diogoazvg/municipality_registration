@@ -7,6 +7,9 @@ class MunicipalityResident < ApplicationRecord
   include Uploaders::ImageUploader::Attachment(:image)
   include BaseErrors
 
+  has_one :address
+  accepts_nested_attributes_for :address
+
   validates :full_name, :email, :birthday, :phone_number, :cpf, :cns, presence: true
   validate :valid_cpf?, :valid_birthday?, :valid_email?, :valid_cns?
 

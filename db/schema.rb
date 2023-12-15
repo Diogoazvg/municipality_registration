@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_30_191939) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_02_004132) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "zip_code", null: false
+    t.string "address1", null: false
+    t.string "complement"
+    t.string "neighborhood", null: false
+    t.string "city", null: false
+    t.integer "uf", null: false
+    t.integer "ibge"
+    t.bigint "municipality_resident_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["municipality_resident_id"], name: "index_addresses_on_municipality_resident_id"
+  end
 
   create_table "municipality_residents", force: :cascade do |t|
     t.string "full_name", null: false
@@ -21,10 +35,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_30_191939) do
     t.string "email", null: false
     t.string "phone_number", null: false
     t.string "image_data", null: false
-    t.integer "active", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "birthday"
+    t.boolean "active", default: false
   end
 
 end

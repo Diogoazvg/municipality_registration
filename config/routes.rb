@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :municipality_residents
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  get '/', to: 'residents#index'
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :municipality_residents
+
+  post '/municipality_resident/:id/status', to: 'municipality_residents#change_status', as: 'municipality_status'
 end

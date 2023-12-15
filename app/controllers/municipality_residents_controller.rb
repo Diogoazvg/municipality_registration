@@ -1,25 +1,21 @@
 # frozen_string_literal: true
 
 class MunicipalityResidentsController < ApplicationController
-  before_action :set_municipality_resident, only: %i[show edit update destroy]
+  before_action :set_municipality_resident, only: %i[show edit update change_status]
 
-  # GET /municipality_residents or /municipality_residents.json
   def index
-    @municipality_residents = MunicipalityResident.all
+    @municipality_residents = MunicipalityResident.includes(:address).all
   end
 
-  # GET /municipality_residents/1 or /municipality_residents/1.json
   def show; end
 
-  # GET /municipality_residents/new
   def new
-    @municipality_resident = MunicipalityResident.new
+    @municipality_resident ||= MunicipalityResident.new
+    @municipality_resident.build_address
   end
 
-  # GET /municipality_residents/1/edit
   def edit; end
 
-  # POST /municipality_residents or /municipality_residents.json
   def create
     @municipality_resident = MunicipalityResident.new(municipality_resident_params)
 
@@ -37,7 +33,6 @@ class MunicipalityResidentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /municipality_residents/1 or /municipality_residents/1.json
   def update
     respond_to do |format|
       if @municipality_resident.update(municipality_resident_params)
@@ -53,16 +48,26 @@ class MunicipalityResidentsController < ApplicationController
     end
   end
 
+  def change_status
+    @municipality_resident.active = !@municipality_resident.active?
+    if @municipality_resident.save
+      flash[:success] = 'Status alterado com sucesso!'
+      redirect_to municipality_residents_path
+    else
+      flash[:error] = 'Não foi possivel alterar o status!'
+    end
+  end
+
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_municipality_resident
     @municipality_resident = MunicipalityResident.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def municipality_resident_params
     params.require(:municipality_resident).permit(:full_name, :cpf, :cns, :email, :birthday, :phone_number,
-                                                  :image)
+                                                  :image, :active, address_attributes: %i[
+                                                    zip_code address1 complement neighborhood city uf ibge
+                                                  ])
   end
 end

@@ -46,6 +46,40 @@
     <%= form.file_field :image %>
   </div>
 
+  <div class="address_form">
+    <h2>Endereço</h2>
+    <%= form.fields_for :address do |address_form| %>
+      <div>
+        <%= address_form.label :city %>
+        <%= address_form.text_field :city %>
+      </div>
+      <div>
+        <%= address_form.label :zip_code %>
+        <%= address_form.text_field :zip_code %>
+      </div>
+      <div>
+        <%= address_form.label :address1 %>
+        <%= address_form.text_area :address1, size: '70x5' %>
+      </div>
+      <div>
+        <%= address_form.label :neighborhood %>
+        <%= address_form.text_field :neighborhood %>
+      </div>
+      <div>
+        <%= address_form.label :uf %>
+        <%= address_form.select :uf, Address.ufs.keys %>
+      </div>
+      <div>
+        <%= address_form.label :complement %>
+        <%= address_form.text_field :complement %>
+      </div>
+      <div>
+        <%= address_form.label :ibge %>
+        <%= address_form.select :ibge, Address.ibge_codes.keys %>
+      </div>
+    <% end %>
+  </div>
+
   <div>
     <%= form.submit %>
   </div>

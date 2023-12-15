@@ -1,3 +1,11 @@
+AllCops:
+  StyleGuideBaseURL: https://rubystyle.guide
+  Exclude:
+    - "**/*.lock"
+    - "**/db/**/*"
+    - "**/bin/**/*"
+    - "**/dummy/**/*"
+
 Metrics/CyclomaticComplexity:
   Enabled: true
   VersionAdded: "0.25"
