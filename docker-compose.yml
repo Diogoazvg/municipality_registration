@@ -6,8 +6,8 @@ services:
     container_name: municipality_postgres_db
     environment:
       POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASS}
     ports:
       - 5432:5432
     volumes:
@@ -23,6 +23,23 @@ services:
       -c checkpoint_completion_target=0.7
       -c wal_buffers=16MB
       -c default_statistics_target=100
+  elasticsearch:
+    image: elasticsearch:8.7.1
+    container_name: elasticsearch
+    ports:
+      - 9200:9200
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    environment:
+      - bootstrap.memory_lock=true
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+      - xpack.security.enabled="false"
+      # - ELASTIC_PASSWORD=$ELASTIC_PASSWORD
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
@@ -34,3 +51,4 @@ services:
       - postgresdb
 volumes:
   postgres-data:
+  es-data:
