@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :municipality_resident do
     full_name { 'Jhon Doe' }
-    cpf { '19473091028' }
+    cpf { Faker::CPF.number }
     cns { '187329617340002' }
     email { 'jhon_doe@email.com' }
     birthday { Date.current - 20.years }
