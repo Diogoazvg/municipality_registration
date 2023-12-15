@@ -14,6 +14,8 @@ module MunicipalityRegistration
     config.load_defaults 7.0
     config.time_zone = 'Brasilia'
 
+    config.autoload_paths += %W[#{config.root}/lib]
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

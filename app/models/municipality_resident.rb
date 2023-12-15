@@ -7,6 +7,7 @@ class MunicipalityResident < ApplicationRecord
   searchkick callbacks: :async
   include Uploaders::ImageUploader::Attachment(:image)
   include BaseErrors
+  include TwilioClient
 
   has_one :address
   accepts_nested_attributes_for :address
@@ -14,6 +15,9 @@ class MunicipalityResident < ApplicationRecord
   validates :full_name, :email, :birthday, :phone_number, :cpf, :cns, presence: true
   validates :cpf, uniqueness: { case_sensitive: false }
   validate :valid_cpf?, :valid_birthday?, :valid_email?, :valid_cns?
+
+  after_create :delivery_messages_create
+  after_update :delivery_messages_update
 
   private
 
@@ -31,5 +35,21 @@ class MunicipalityResident < ApplicationRecord
 
   def valid_cns?
     add_errors(:cns, 'invalid') unless Services::Cns.validate(cns)
+  end
+
+  def delivery_messages_create
+    call_message(I18n.t('sms.messages.registered_successfully'))
+  end
+
+  def delivery_messages_update
+    return unless updated_at_previously_changed?
+
+    call_message(I18n.t('sms.messages.updated_data'))
+  end
+
+  def call_message(message)
+    send_message(body: message, to: "+55#{phone_number}")
+
+    ApplicationMailer.send_email(self).deliver_now
   end
 end

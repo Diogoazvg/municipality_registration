@@ -8,6 +8,12 @@ RSpec.describe MunicipalityResidentsController, type: :controller do
   let(:model) { MunicipalityResident }
   let(:user_last) { model.last }
   let(:status) { true }
+  let(:twilio_client) { instance_double(Twilio::REST::Client) }
+
+  before do
+    allow(Twilio::REST::Client).to receive(:new).and_return(twilio_client)
+    allow(twilio_client).to receive_message_chain(:messages, :create)
+  end
 
   describe 'Create' do
     before { post :create, params: { municipality_resident: attributes } }
