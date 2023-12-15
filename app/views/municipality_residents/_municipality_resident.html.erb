@@ -1,0 +1,37 @@
+<div id="<%= dom_id municipality_resident %>">
+  <p>
+    <strong>Full name:</strong>
+    <%= municipality_resident.full_name %>
+  </p>
+
+  <p>
+    <strong>Cpf:</strong>
+    <%= municipality_resident.cpf %>
+  </p>
+
+  <p>
+    <strong>Cns:</strong>
+    <%= municipality_resident.cns %>
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    <%= municipality_resident.email %>
+  </p>
+
+  <p>
+    <strong>Birthday:</strong>
+    <%= municipality_resident.birthday %>
+  </p>
+
+  <p>
+    <strong>Phone number:</strong>
+    <%= municipality_resident.phone_number %>
+  </p>
+
+  <p>
+    <strong>Image data:</strong>
+    <%= image_tag municipality_resident.image_url if municipality_resident.image_data %>
+  </p>
+
+</div>
