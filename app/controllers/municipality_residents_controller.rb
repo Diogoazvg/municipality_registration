@@ -4,7 +4,11 @@ class MunicipalityResidentsController < ApplicationController
   before_action :set_municipality_resident, only: %i[show edit update change_status]
 
   def index
-    @municipality_residents = MunicipalityResident.includes(:address).all
+    @municipality_residents = if params[:search].present?
+                                MunicipalityResident.search(params[:search]).results
+                              else
+                                MunicipalityResident.search('*').results
+                              end
   end
 
   def show; end
@@ -19,43 +23,24 @@ class MunicipalityResidentsController < ApplicationController
   def create
     @municipality_resident = MunicipalityResident.new(municipality_resident_params)
 
-    respond_to do |format|
-      if @municipality_resident.save
-        format.html do
-          redirect_to municipality_resident_url(@municipality_resident),
-                      notice: 'Municipality resident was successfully created.'
-        end
-        format.json { render :show, status: :created, location: @municipality_resident }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @municipality_resident.errors, status: :unprocessable_entity }
-      end
+    if @municipality_resident.save
+      redirect_to municipality_residents_path
+    else
+      redirect_to action: :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @municipality_resident.update(municipality_resident_params)
-        format.html do
-          redirect_to municipality_resident_url(@municipality_resident),
-                      notice: 'Municipality resident was successfully updated.'
-        end
-        format.json { render :show, status: :ok, location: @municipality_resident }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @municipality_resident.errors, status: :unprocessable_entity }
-      end
+    if @municipality_resident.update(municipality_resident_params)
+      redirect_to municipality_resident_url(@municipality_resident)
+    else
+      redirect_to action: :edit
     end
   end
 
   def change_status
     @municipality_resident.active = !@municipality_resident.active?
-    if @municipality_resident.save
-      flash[:success] = 'Status alterado com sucesso!'
-      redirect_to municipality_residents_path
-    else
-      flash[:error] = 'Não foi possivel alterar o status!'
-    end
+    redirect_to municipality_residents_path if @municipality_resident.save
   end
 
   private
@@ -66,8 +51,8 @@ class MunicipalityResidentsController < ApplicationController
 
   def municipality_resident_params
     params.require(:municipality_resident).permit(:full_name, :cpf, :cns, :email, :birthday, :phone_number,
-                                                  :image, :active, address_attributes: %i[
-                                                    zip_code address1 complement neighborhood city uf ibge
+                                                  :image, :image_data, :active, address_attributes: %i[
+                                                    id zip_code address1 complement neighborhood city uf ibge
                                                   ])
   end
 end

@@ -6,7 +6,6 @@ class Address < ApplicationRecord
   validates :zip_code, :address1, :neighborhood, :city, :uf, presence: true
 
   enum uf: {
-    'Selecionar': nil,
     'AC, Acre': 0,
     'AL, Alagoas': 1,
     'AP, Amapá': 2,
@@ -37,7 +36,6 @@ class Address < ApplicationRecord
   }, _prefix: :currently_uf
 
   enum ibge_code: {
-    'Selecionar': nil,
     '12': 0,
     '27': 1,
     '16': 2,
