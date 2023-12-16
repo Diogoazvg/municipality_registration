@@ -23,18 +23,22 @@ class MunicipalityResidentsController < ApplicationController
   def create
     @municipality_resident = MunicipalityResident.new(municipality_resident_params)
 
-    if @municipality_resident.save
-      redirect_to municipality_residents_path
-    else
-      redirect_to action: :new
+    respond_to do |format|
+      if @municipality_resident.save
+        format.html { redirect_to municipality_residents_path }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
   def update
-    if @municipality_resident.update(municipality_resident_params)
-      redirect_to municipality_resident_url(@municipality_resident)
-    else
-      redirect_to action: :edit
+    respond_to do |format|
+      if @municipality_resident.update(municipality_resident_params)
+        format.html { redirect_to municipality_resident_url(@municipality_resident) }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -52,7 +56,7 @@ class MunicipalityResidentsController < ApplicationController
   def municipality_resident_params
     params.require(:municipality_resident).permit(:full_name, :cpf, :cns, :email, :birthday, :phone_number,
                                                   :image, :image_data, :active, address_attributes: %i[
-                                                    id zip_code address1 complement neighborhood city uf ibge
+                                                    id zip_code address1 complement neighborhood city uf ibge ibge_code
                                                   ])
   end
 end

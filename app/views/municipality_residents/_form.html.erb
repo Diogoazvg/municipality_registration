@@ -33,7 +33,7 @@
 
   <div>
     <%= form.label :birthday, style: "display: block" %>
-    <%= form.date_select :birthday %>
+    <%= form.date_select :birthday, :start_year => Date.current.year, :end_year => 1920 %>
   </div>
 
   <div>

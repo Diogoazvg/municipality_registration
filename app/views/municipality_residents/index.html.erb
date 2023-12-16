@@ -46,12 +46,9 @@
         <td> <%= address&.ibge %> </td>
         <td>
           <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Options
-            </button>
             <ul class="dropdown-menu dropdown-menu-dark">
-              <li><%= link_to "Editar", edit_municipality_resident_path(municipality_resident.id) %></li>
-              <li><%= button_to municipality_resident.active? ? "Desativar" : "Ativar", municipality_status_path(municipality_resident.id), method: :post %></li>
+                <%= button_to "Editar", edit_municipality_resident_path(municipality_resident.id), method: :get %>
+                <%= button_to municipality_resident.active? ? "Desativar" : "Ativar", municipality_status_path(municipality_resident.id), method: :post %>
             </ul>
           </div>
         </td>

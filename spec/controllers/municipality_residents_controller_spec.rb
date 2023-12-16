@@ -16,31 +16,36 @@ RSpec.describe MunicipalityResidentsController, type: :controller do
   end
 
   describe 'Create' do
-    before { post :create, params: { municipality_resident: attributes } }
+    let(:municipality_resident) { attributes_for(:municipality_resident) }
+    let(:address) { attributes_for(:address) }
+
     context 'when create' do
-      let(:attributes) { attributes_for(:municipality_resident) }
-
-      it 'create a resident', :aggregate_faluires do
-        post :create, params: { municipality_resident: attributes }
-
-        expect(user_last.full_name).to eq attributes[:full_name]
-        expect(response).to redirect_to(new_municipality_resident_path)
+      before do
+        post :create, params: { municipality_resident: municipality_resident.merge(address_attributes: address) }
       end
+
+      it { expect(user_last.full_name).to eq municipality_resident[:full_name] }
+      it { expect(response).to redirect_to(municipality_residents_path) }
     end
 
-    context 'with error' do
-      let(:attributes) { { full_name: 'name' } }
+    context 'when the mandatory parameters are not passed' do
+      before { post :create, params: { municipality_resident: { name: '' } } }
 
-      it 'description' do
-        post :create, params: { municipality_resident: attributes }
+      it { assert_response 422 }
+      it { expect(model.count).to eq 0 }
+    end
+  end
 
-        assert_response :redirect
-      end
+  describe 'New' do
+    it 'success' do
+      get :new
+      expect(response).to be_successful
+      expect(response).to render_template :new
     end
   end
 
   describe 'Update' do
-    context 'when update' do
+    context 'when success' do
       it 'update a resident' do
         patch :update, params: { id: subject.id, municipality_resident: { full_name: 'New name' } }
 
@@ -50,11 +55,9 @@ RSpec.describe MunicipalityResidentsController, type: :controller do
     end
 
     context 'with error' do
-      it 'description' do
-        patch :update, params: { id: subject.id, municipality_resident: { full_name: nil } }
+      before { patch :update, params: { id: subject.id, municipality_resident: { full_name: nil } } }
 
-        assert_response :redirect
-      end
+      it { assert_response 422 }
     end
   end
 
@@ -72,6 +75,7 @@ RSpec.describe MunicipalityResidentsController, type: :controller do
 
     it { expect(subject.reload.active?).to be_truthy }
   end
+
   describe 'Search' do
     before do
       create(:municipality_resident, full_name: 'Albert Some')

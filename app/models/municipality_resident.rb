@@ -12,8 +12,9 @@ class MunicipalityResident < ApplicationRecord
   has_one :address
   accepts_nested_attributes_for :address
 
-  validates :full_name, :email, :birthday, :phone_number, :cpf, :cns, presence: true
+  validates :full_name, :email, :birthday, :phone_number, :cpf, :cns, :image_data, presence: true
   validates :cpf, uniqueness: { case_sensitive: false }
+  validates :phone_number, format: { with: /\A[0-9]{11}\z/, message: I18n.t('errors.messages.allow_digits') }
   validate :valid_cpf?, :valid_birthday?, :valid_email?, :valid_cns?
 
   after_create :delivery_messages_create
