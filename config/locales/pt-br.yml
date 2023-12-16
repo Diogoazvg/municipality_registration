@@ -24,11 +24,17 @@ pt-br:
       municipality_resident:
         birthday: Data de Aniversário
     errors:
+      models:
+        municipality_resident:
+          attributes:
+            cpf:
+              taken: inválido
       messages:
         invalid: inválido.
   errors:
     messages:
       blank: Não pode ficar em branco.
+      allow_digits: Permitidos somente 11 digitos no formato DD980000000.
   sms:
     messages:
       updated_data: Dados atualizados.
