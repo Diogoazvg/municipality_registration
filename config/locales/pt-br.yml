@@ -1,4 +1,13 @@
 pt-br:
+  full_name: Nome Completo
+  birthday: Data de nascimento
+  phone_number: Telefone
+  image_data: Foto
+  zip_code: CEP
+  address_1: Endereço
+  Neighborhood: Bairro
+  complement: Complemento
+  city: Cidade
   date:
     month_names:
       [

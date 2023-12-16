@@ -12,7 +12,7 @@
   <% end %>
 
   <div>
-    <%= form.label :full_name, style: "display: block" %>
+    <%= form.label t('full_name'), style: "display: block" %>
     <%= form.text_field :full_name %>
   </div>
 
@@ -32,17 +32,17 @@
   </div>
 
   <div>
-    <%= form.label :birthday, style: "display: block" %>
+    <%= form.label t('birthday'), style: "display: block" %>
     <%= form.date_select :birthday, :start_year => Date.current.year, :end_year => 1920 %>
   </div>
 
   <div>
-    <%= form.label :phone_number, style: "display: block" %>
+    <%= form.label t('phone_number'), style: "display: block" %>
     <%= form.text_field :phone_number %>
   </div>
 
   <div>
-    <%= form.label :image %>
+    <%= form.label t('image_data') %>
     <%= form.file_field :image %>
   </div>
 
@@ -50,19 +50,19 @@
     <h2>Endereço</h2>
     <%= form.fields_for :address do |address_form| %>
       <div>
-        <%= address_form.label :city %>
+        <%= address_form.label t('city') %>
         <%= address_form.text_field :city %>
       </div>
       <div>
-        <%= address_form.label :zip_code %>
+        <%= address_form.label t('zip_code') %>
         <%= address_form.text_field :zip_code %>
       </div>
       <div>
-        <%= address_form.label :address1 %>
+        <%= address_form.label t('address_1') %>
         <%= address_form.text_area :address1, size: '70x5' %>
       </div>
       <div>
-        <%= address_form.label :neighborhood %>
+        <%= address_form.label t('Neighborhood') %>
         <%= address_form.text_field :neighborhood %>
       </div>
       <div>
@@ -70,7 +70,7 @@
         <%= address_form.select :uf, Address.ufs.keys %>
       </div>
       <div>
-        <%= address_form.label :complement %>
+        <%= address_form.label t('complement') %>
         <%= address_form.text_field :complement %>
       </div>
       <div>

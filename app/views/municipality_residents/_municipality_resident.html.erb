@@ -1,6 +1,6 @@
 <div id="<%= dom_id municipality_resident %>">
   <p>
-    <strong>Full name:</strong>
+    <strong> <%= t('full_name') %> </strong>
     <%= municipality_resident.full_name %>
   </p>
 
@@ -15,23 +15,57 @@
   </p>
 
   <p>
-    <strong>Email:</strong>
+    <strong>Email</strong>
     <%= municipality_resident.email %>
   </p>
 
   <p>
-    <strong>Birthday:</strong>
+    <strong><%= t('birthday') %></strong>
     <%= municipality_resident.birthday %>
   </p>
 
   <p>
-    <strong>Phone number:</strong>
+    <strong><%= t('phone_number') %></strong>
     <%= municipality_resident.phone_number %>
   </p>
 
   <p>
-    <strong>Image data:</strong>
+    <strong><%= t('image_data:') %></strong>
     <%= image_tag municipality_resident.image_url if municipality_resident.image_data %>
   </p>
 
+  <p>
+    <strong><%= t('city') %></strong>
+    <%= municipality_resident.address.city %>
+  </p>
+
+  <p>
+    <strong><%= t('zip_code') %></strong>
+    <%= municipality_resident.address.zip_code %>
+  </p>
+
+  <p>
+    <strong><%= t('address_1') %></strong>
+    <%= municipality_resident.address.address1 %>
+  </p>
+
+  <p>
+    <strong><%= t('Neighborhood') %></strong>
+    <%= municipality_resident.address.neighborhood %>
+  </p>
+
+  <p>
+    <strong>UF:</strong>
+    <%= municipality_resident.address.uf %>
+  </p>
+
+  <p>
+    <strong><%= t('complement') %></strong>
+    <%= municipality_resident.address.complement %>
+  </p>
+
+  <p>
+    <strong>IBGE:</strong>
+    <%= municipality_resident.address.ibge %>
+  </p>
 </div>
