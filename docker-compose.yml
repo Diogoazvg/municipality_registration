@@ -24,7 +24,7 @@ services:
       -c wal_buffers=16MB
       -c default_statistics_target=100
   elasticsearch:
-    image: elasticsearch:8.7.1
+    image: elasticsearch:8.11.3
     container_name: elasticsearch
     ports:
       - 9200:9200
