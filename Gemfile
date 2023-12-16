@@ -13,7 +13,9 @@ gem 'jbuilder'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.5'
+gem 'sassc-rails'
 gem 'searchkick'
+
 gem 'shrine', '~> 3.4'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
@@ -27,6 +29,7 @@ group :development, :test do
   gem 'dotenv-rails', '~> 2.8', '>= 2.8.1'
   gem 'factory_bot_rails', '~> 6.2'
   gem 'faker', '~> 3.2'
+  gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 6.0', '>= 6.0.2'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'simplecov', require: false
