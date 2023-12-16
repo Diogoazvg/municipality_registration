@@ -8,7 +8,7 @@ FactoryBot.define do
     complement { 'Next a place' }
     neighborhood { 'Some neighborhood' }
     city { 'A city' }
-    uf { 1 }
-    ibge { '1234567' }
+    uf { 'AC, Acre' }
+    ibge { 2 }
   end
 end
