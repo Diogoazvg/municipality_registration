@@ -13,5 +13,5 @@ SimpleCov.start do
   add_filter 'spec'
   add_filter 'task'
   add_filter(/\w+_schema.rb/)
-  add_filter 'app/controllers/graphql_controller.rb'
+  add_filter 'lib/uploaders/image_uploader.rb'
 end

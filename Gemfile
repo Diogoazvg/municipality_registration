@@ -22,6 +22,7 @@ gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'twilio-ruby', '~> 6.0', '>= 6.0.2'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'webpacker', '~> 5.4', '>= 5.4.4'
 
 group :development, :test do
   gem 'byebug'

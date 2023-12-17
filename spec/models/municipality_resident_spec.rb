@@ -6,7 +6,7 @@ RSpec.describe MunicipalityResident, type: :model do
   subject { build(:municipality_resident, cpf:, birthday:, phone_number:, email:, cns:) }
 
   let(:cpf) { Faker::CPF.number }
-  let(:cns) { '187329617340002' }
+  let(:cns) { '702550937100001' }
   let(:email) { 'jhon_doe@email.com' }
   let(:phone_number) { '22986676541' }
   let(:birthday) { Date.current - 20.years }
