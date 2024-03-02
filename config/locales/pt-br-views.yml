@@ -1,0 +1,16 @@
+pt-br:
+  create_municipality: Criar Munícipe
+  full_name: Nome Completo
+  birthday: Data de nascimento
+  phone_number: Telefone
+  image_data: Foto
+  zip_code: CEP
+  address_1: Endereço
+  Neighborhood: Bairro
+  complement: Complemento
+  city: Cidade
+  new_municipality_resident: Formulário de Criação de Munícipe
+  search: Buscar
+  editing_municipality_resident: Edição de munícipe
+  show_municipality: Visualizar
+  back_to_municipalities: Voltar para a listagem de munícipes

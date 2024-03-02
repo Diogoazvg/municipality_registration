@@ -2,10 +2,11 @@
   <h1>Lista de Municipes</h1>
 
   <%= form_with url: municipality_residents_path, method: :get do |f| %>
-    <%= f.text_field :search %>
+    <%= f.text_field :search, class: "form-control-sm" %>
     <%= f.hidden_field :model, value: :municipality_resident %>
-    <%= f.submit "Search" %>
+    <%= f.submit t('search'), class: "btn btn-primary" %>
   <% end %>
+  <%= button_to "Criar novo Municipe", new_municipality_resident_path, class: "btn btn-success", method: :get %>
   <table class="table table-striped table-sm fs--1 mb-0" id="municipality_residents">
     <thead>
       <tr>
@@ -45,19 +46,24 @@
         <td> <%= address&.complement %> </td>
         <td> <%= address&.ibge %> </td>
         <td>
-          <div class="dropdown">
-            <ul class="dropdown-menu dropdown-menu-dark">
-                <%= button_to "Editar", edit_municipality_resident_path(municipality_resident.id), method: :get %>
-                <%= button_to municipality_resident.active? ? "Desativar" : "Ativar", municipality_status_path(municipality_resident.id), method: :post %>
-            </ul>
+          <div class='form-group'>
+            <div class="row">
+              <div class="col">
+                <%= button_to t("show_municipality"), municipality_resident, method: :get, class: "btn btn-dark" %>
+              </div>
+              <div class="col">
+                <%= button_to "Editar", edit_municipality_resident_path(municipality_resident.id), method: :get, class: "btn btn-warning" %>
+              </div>
+              <div class="col">
+                <%= button_to municipality_resident.active? ? "Desativar" : "Ativar", municipality_status_path(municipality_resident.id), class: "btn btn-danger", method: :post %>
+              </div>
+            </div>
           </div>
         </td>
       </tr>
       <% end %>
     </tbody>
   </table>
-
-  <%= link_to "Criar novo Municipe", new_municipality_resident_path %>
 </div>
 
 <style>

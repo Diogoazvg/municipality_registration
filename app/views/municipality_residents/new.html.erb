@@ -1,9 +1,9 @@
-<h1>New municipality resident</h1>
+<h1><%= t('new_municipality_resident') %></h1>
 
 <%= render "form", municipality_resident: @municipality_resident %>
 
 <br>
 
 <div>
-  <%= link_to "Back to municipality residents", municipality_residents_path %>
+  <%= button_to "Back to municipality residents", municipality_residents_path, method: :get, class: "btn btn-dark" %>
 </div>

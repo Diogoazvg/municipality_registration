@@ -3,6 +3,6 @@
 <%= render @municipality_resident %>
 
 <div>
-  <%= link_to "Edit this municipality resident", edit_municipality_resident_path(@municipality_resident) %> |
-  <%= link_to "Back to municipality residents", municipality_residents_path %>
+  <%= button_to "Editar", edit_municipality_resident_path(@municipality_resident), method: :get, class: "btn btn-warning" %>
+  <%= button_to t("back_to_municipalities"), municipality_residents_path, method: :get, class: "btn btn-success" %>
 </div>

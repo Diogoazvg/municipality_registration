@@ -1,86 +1,95 @@
-<%= form_with(model: municipality_resident) do |form| %>
-  <% if municipality_resident.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(municipality_resident.errors.count, "error") %> prohibited this municipality_resident from being saved:</h2>
+  <%= form_with(model: municipality_resident) do |form| %>
+    <% if municipality_resident.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(municipality_resident.errors.count, "error") %> não é possível salvar </h2>
 
-      <ul>
-        <% municipality_resident.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+          <ul>
+            <% municipality_resident.errors.each do |error| %>
+            <div class=”alert alert-primary” role=”alert”>
+              <li><%= error.full_message %></li>
+            </div>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+      <div class='form-group'>
+        <div class="row">
+          <div class="col">
+            <%= form.label t('full_name'), style: "display: block" %>
+            <%= form.text_field :full_name, class: "form-control" %>
+          </div>
+
+          <div class="col">
+            <%= form.label :cpf, style: "display: block" %>
+            <%= form.text_field :cpf, class: "form-control" %>
+          </div>
+
+          <div class="col">
+            <%= form.label :cns, style: "display: block" %>
+            <%= form.text_field :cns, class: "form-control" %>
+          </div>
+
+          <div class="col">
+            <%= form.label :email, style: "display: block" %>
+            <%= form.text_field :email, class: "form-control" %>
+          </div>
+
+          <div class="col">
+            <%= form.label t('birthday'), style: "display: block" %>
+            <%= form.date_select :birthday, :start_year => Date.current.year, :end_year => 1920 %>
+          </div>
+
+          <div class="col">
+            <%= form.label t('phone_number'), style: "display: block" %>
+            <%= form.text_field :phone_number, class: "form-control" %>
+          </div>
+
+          <div class="col">
+            <%= form.label t('image_data') %>
+            <%= form.file_field :image, class: "form-control" %>
+          </div>
+          <div class="address_form">
+            <h2>Endereço</h2>
+            <%= form.fields_for :address do |address_form| %>
+              <div class="row">
+                <div class="col">
+                  <%= address_form.label t('city') %>
+                  <%= address_form.text_field :city, class: "form-control" %>
+                </div>
+                <div class="col">
+                  <%= address_form.label t('zip_code') %>
+                  <%= address_form.text_field :zip_code, class: "form-control" %>
+                </div>
+                <div class="col">
+                  <%= address_form.label t('address_1') %>
+                  <%= address_form.text_area :address1, size: '70x5', class: "form-control" %>
+                </div>
+                <div class="col">
+                  <%= address_form.label t('Neighborhood') %>
+                  <%= address_form.text_field :neighborhood, class: "form-control" %>
+                </div>
+                <div class="col">
+                  <div class="list-group">
+                    <%= address_form.label :uf %>
+                    <%= address_form.select :uf, Address.ufs.keys %>
+                  </div>
+                </div>
+                <div class="col">
+                  <%= address_form.label t('complement') %>
+                  <%= address_form.text_field :complement, class: "form-control" %>
+                </div>
+                <div class="col">
+                  <div class="list-group">
+                    <%= address_form.label :ibge %>
+                    <%= address_form.select :ibge, Address.ibge_codes.keys%>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <div class="form-group">
+      <%= form.submit t('create_municipality'), class: "btn btn-primary" %>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label t('full_name'), style: "display: block" %>
-    <%= form.text_field :full_name %>
-  </div>
-
-  <div>
-    <%= form.label :cpf, style: "display: block" %>
-    <%= form.text_field :cpf %>
-  </div>
-
-  <div>
-    <%= form.label :cns, style: "display: block" %>
-    <%= form.text_field :cns %>
-  </div>
-
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div>
-    <%= form.label t('birthday'), style: "display: block" %>
-    <%= form.date_select :birthday, :start_year => Date.current.year, :end_year => 1920 %>
-  </div>
-
-  <div>
-    <%= form.label t('phone_number'), style: "display: block" %>
-    <%= form.text_field :phone_number %>
-  </div>
-
-  <div>
-    <%= form.label t('image_data') %>
-    <%= form.file_field :image %>
-  </div>
-
-  <div class="address_form">
-    <h2>Endereço</h2>
-    <%= form.fields_for :address do |address_form| %>
-      <div>
-        <%= address_form.label t('city') %>
-        <%= address_form.text_field :city %>
-      </div>
-      <div>
-        <%= address_form.label t('zip_code') %>
-        <%= address_form.text_field :zip_code %>
-      </div>
-      <div>
-        <%= address_form.label t('address_1') %>
-        <%= address_form.text_area :address1, size: '70x5' %>
-      </div>
-      <div>
-        <%= address_form.label t('Neighborhood') %>
-        <%= address_form.text_field :neighborhood %>
-      </div>
-      <div>
-        <%= address_form.label :uf %>
-        <%= address_form.select :uf, Address.ufs.keys %>
-      </div>
-      <div>
-        <%= address_form.label t('complement') %>
-        <%= address_form.text_field :complement %>
-      </div>
-      <div>
-        <%= address_form.label :ibge %>
-        <%= address_form.select :ibge, Address.ibge_codes.keys %>
-      </div>
-    <% end %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>

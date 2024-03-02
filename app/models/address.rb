@@ -36,7 +36,7 @@ class Address < ApplicationRecord
   }, _prefix: :currently_uf
 
   enum ibge_code: {
-    'empty': nil,
+    'nenhum': nil,
     '12': 0,
     '27': 1,
     '16': 2,

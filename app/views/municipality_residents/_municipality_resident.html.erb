@@ -1,71 +1,68 @@
-<div id="<%= dom_id municipality_resident %>">
-  <p>
-    <strong> <%= t('full_name') %> </strong>
-    <%= municipality_resident.full_name %>
-  </p>
-
-  <p>
-    <strong>Cpf:</strong>
-    <%= municipality_resident.cpf %>
-  </p>
-
-  <p>
-    <strong>Cns:</strong>
-    <%= municipality_resident.cns %>
-  </p>
-
-  <p>
-    <strong>Email</strong>
-    <%= municipality_resident.email %>
-  </p>
-
-  <p>
-    <strong><%= t('birthday') %></strong>
-    <%= municipality_resident.birthday %>
-  </p>
-
-  <p>
-    <strong><%= t('phone_number') %></strong>
-    <%= municipality_resident.phone_number %>
-  </p>
-
-  <p>
-    <strong><%= t('image_data:') %></strong>
-    <%= image_tag municipality_resident.image_url if municipality_resident.image_data %>
-  </p>
-
-  <p>
-    <strong><%= t('city') %></strong>
-    <%= municipality_resident.address.city %>
-  </p>
-
-  <p>
-    <strong><%= t('zip_code') %></strong>
-    <%= municipality_resident.address.zip_code %>
-  </p>
-
-  <p>
-    <strong><%= t('address_1') %></strong>
-    <%= municipality_resident.address.address1 %>
-  </p>
-
-  <p>
-    <strong><%= t('Neighborhood') %></strong>
-    <%= municipality_resident.address.neighborhood %>
-  </p>
-
-  <p>
-    <strong>UF:</strong>
-    <%= municipality_resident.address.uf %>
-  </p>
-
-  <p>
-    <strong><%= t('complement') %></strong>
-    <%= municipality_resident.address.complement %>
-  </p>
-
-  <p>
-    <strong>IBGE:</strong>
-    <%= municipality_resident.address.ibge %>
-  </p>
+<div class="table-responsive">
+  <table class="table table-striped table-sm fs--1 mb-0" id="municipality_residents">
+    <thead>
+      <tr>
+        <th> ID </th>
+        <th> Name </th>
+        <th> CPF </th>
+        <th> CNS </th>
+        <th> Telefone </th>
+        <th> Email </th>
+        <th> Active? </th>
+        <th> City </th>
+        <th> CEP </th>
+        <th> END: </th>
+        <th> Neighborhood </th>
+        <th> UF </th>
+        <th> complement </th>
+        <th> ibge </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% address = municipality_resident.address %>
+      <tr>
+        <td><%= municipality_resident.id %></td>
+        <td><%= municipality_resident.full_name %></td>
+        <td><%= "#{municipality_resident.cpf.first(3)}.***.***-#{municipality_resident.cpf.last(2)}"%></td>
+        <td><%= "#{municipality_resident.cns.first(3)}************"%></td>
+        <td><%= "(#{municipality_resident.phone_number.first(2)}) *****-#{municipality_resident.phone_number.last(4)}"%></td>
+        <td><%= municipality_resident.email %></td>
+        <td><%= municipality_resident.active? %></td>
+        <td> <%= address&.city %> </td>
+        <td> <%= address&.zip_code %> </td>
+        <td> <%= address&.address1 %> </td>
+        <td> <%= address&.neighborhood %> </td>
+        <td> <%= address&.uf %> </td>
+        <td> <%= address&.complement %> </td>
+        <td> <%= address&.ibge %> </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
+
+<style>
+  #municipality_residents {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 50px
+  }
+
+  #municipality_residents td, #municipality_residents th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  #municipality_residents tr:nth-child(even){background-color: rgb(234, 232, 232);}
+
+  #municipality_residents tr:hover {background-color: rgb(147, 133, 174);}
+
+  #municipality_residents th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(54, 79, 96);
+    color: white;
+  }
+</style>

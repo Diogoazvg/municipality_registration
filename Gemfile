@@ -7,6 +7,7 @@ ruby '3.2.2'
 gem 'bootsnap', require: false
 gem 'bootstrap', '~> 5.3.0.alpha3'
 gem 'cpf_cnpj', '~> 0.5.0'
+gem 'cssbundling-rails'
 gem 'elasticsearch'
 gem 'importmap-rails'
 gem 'jbuilder'
@@ -52,3 +53,5 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
+
+gem 'jsbundling-rails', '~> 1.2'
